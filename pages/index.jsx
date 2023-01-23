@@ -5,7 +5,8 @@ import {
         query, 
         updateDoc, 
         doc,
-        addDoc
+        addDoc,
+        deleteDoc
       } from 'firebase/firestore'
 import { db } from './firebase'
 import Head from 'next/head'
@@ -55,7 +56,10 @@ export default function Home() {
       })
   }
 
-  // Delete todo 
+  // Delete todo
+  const deleteTodo = async (id) => {
+    await deleteDoc(doc(db, 'asdfqwe', id))  
+  }  
 
   return (
     <>
@@ -75,8 +79,13 @@ export default function Home() {
           </form>
           <ul>
             {
-              todos.map((todo, index) => <Todo key={index} todo={todo} toggleComplete={toggleComplete
-              }/>)
+              todos.map((todo, index) => 
+                <Todo 
+                  key={index} 
+                  todo={todo} 
+                  toggleComplete={toggleComplete} 
+                  deleteTodo={deleteTodo}  
+                />)
             }
           </ul>
          {todos.length < 1 ? null : <p className='text-center p-2'>You have {todos.length} todos.</p>}
