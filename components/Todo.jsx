@@ -9,7 +9,7 @@ const Todo = ({ todo }) => {
             <div className='flex items-center gap-4'>
                 <input className='cursor-pointer' type="checkbox" />
                 {/* if input complete => line-through */}
-                <p className=''>{todo}</p>
+                <p className=''>{todo.text}</p>
             </div>
             <button className='cursor-pointer flex items-center'><FaRegTrashAlt size={20} /></button>
     </li>

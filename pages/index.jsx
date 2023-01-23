@@ -1,12 +1,34 @@
 import Todo from '@/components/Todo'
+import { collection, onSnapshot, query } from 'firebase/firestore'
+import { db } from './firebase'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 
 export default function Home() {
 
-  const [todos, setTodos] = useState(['Learn React', 'Start Trading Professionally', 'Read 10 pages of Think and Grow Rich'])
+  const [todos, setTodos] = useState([])
+
+  // Create todo
+
+   // Read todo from firebase
+  useEffect(() => {
+    const q = query(collection(db, 'asdfqwe'));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let todosArr = [];
+      querySnapshot.forEach((doc) => {
+        todosArr.push({ ...doc.data(), id: doc.id });
+      });
+      setTodos(todosArr);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  
+  // Update todo fbase
+
+  // Delete todo 
 
   return (
     <>
