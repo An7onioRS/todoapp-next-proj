@@ -8,7 +8,7 @@ import {
         addDoc,
         deleteDoc
       } from 'firebase/firestore'
-import { db } from './firebase'
+import { db } from '../firebase'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
