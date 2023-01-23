@@ -1,5 +1,5 @@
 import Todo from '@/components/Todo'
-import { collection, onSnapshot, query } from 'firebase/firestore'
+import { collection, onSnapshot, query, updateDoc, doc } from 'firebase/firestore'
 import { db } from './firebase'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -27,6 +27,11 @@ export default function Home() {
 
   
   // Update todo fbase
+  const toggleComplete = async (todo) => {
+      await updateDoc(doc(db, 'asdfqwe', todo.id), {
+        completed: !todo.completed
+      })
+  }
 
   // Delete todo 
 
@@ -48,7 +53,8 @@ export default function Home() {
           </form>
           <ul>
             {
-              todos.map((todo, index) => <Todo key={index} todo={todo} />)
+              todos.map((todo, index) => <Todo key={index} todo={todo} toggleComplete={toggleComplete
+              }/>)
             }
           </ul>
           <p className='text-center p-2'>You have {todos.length} todos.</p>
